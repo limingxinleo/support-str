@@ -13,9 +13,92 @@ use PHPUnit\Framework\TestCase;
 
 class BaseTest extends TestCase
 {
-    public function testWrap()
+    protected $author = 'limx';
+    protected $name = '李铭昕';
+
+    public function testAscii()
     {
-        $this->assertTrue(true);
+        $this->assertEquals('W', Str::ascii('Ω'));
+    }
+
+    public function testCamel()
+    {
+        $this->assertEquals('testCase', Str::camel('Test-Case'));
+    }
+
+    public function testContains()
+    {
+        $this->assertTrue(Str::contains('limx', 'l'));
+    }
+
+    public function testEndsWith()
+    {
+        $this->assertTrue(Str::endsWith('limx', 'mx'));
+    }
+
+    public function testFinish()
+    {
+        $this->assertEquals('limx', Str::finish('limx', 'x'));
+        $this->assertEquals('limx', Str::finish('lim', 'x'));
+        $this->assertEquals('https://a.cn/', Str::finish('https://a.cn/', '/'));
+        $this->assertEquals('https://a.cn/', Str::finish('https://a.cn', '/'));
+    }
+
+    public function testIs()
+    {
+        $this->assertTrue(Str::is('li*', 'limx'));
+        $this->assertTrue(!Str::is('li*', 'lmx'));
+    }
+
+    public function testKebab()
+    {
+        $this->assertEquals('hello-world', Str::kebab('Hello    World'));
+        $this->assertEquals('hello-world', Str::kebab('HelloWorld'));
+    }
+
+    public function testLength()
+    {
+        $this->assertTrue(Str::length('limx') === 4);
+        $this->assertTrue(Str::length('李铭昕') === 3);
+    }
+
+    public function testLimit()
+    {
+        $this->assertEquals('limx...', Str::limit('limx and Agnes', 4));
+    }
+
+    public function testLower()
+    {
+        $this->assertEquals('limx and agnes', Str::lower('Limx AND Agnes'));
+    }
+
+    public function testWords()
+    {
+        $this->assertEquals('limx and...', Str::words('limx and anges', 2));
+    }
+
+    public function testParseCallback()
+    {
+        $result = Str::parseCallback('IndexController@index');
+        $this->assertEquals([
+            'IndexController',
+            'index'
+        ], $result);
+    }
+
+    public function testPlural()
+    {
+        if (class_exists('lmx\\Support\\Pluralizer')) {
+            $this->assertEquals('cats', Str::plural('cat', 2));
+        } else {
+            $this->assertEquals('cat', Str::plural('cat', 2));
+        }
+    }
+
+    public function testRandom()
+    {
+        // $this->assertTrue(Str::length(Str::random(12)) === 12);
+        $this->assertTrue(Str::length(Str::quickRandom(12)) === 12);
     }
 
 }

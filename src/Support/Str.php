@@ -13,8 +13,6 @@
 
 namespace limx\Support;
 
-namespace Illuminate\Support;
-
 class Str
 {
 
@@ -232,7 +230,10 @@ class Str
      */
     public static function plural($value, $count = 2)
     {
-        return Pluralizer::plural($value, $count);
+        if (class_exists('limx\\Support\\Pluralizer')) {
+            return Pluralizer::plural($value, $count);
+        }
+        return $value;
     }
 
     /**
@@ -268,6 +269,7 @@ class Str
      */
     public static function quickRandom($length = 16)
     {
+
         if (PHP_MAJOR_VERSION > 5) {
             return static::random($length);
         }
