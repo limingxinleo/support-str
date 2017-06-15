@@ -118,5 +118,37 @@ class BaseTest extends TestCase
         $this->assertEquals('Limx And Agnes', Str::title('limx and Agnes'));
     }
 
+    public function testSlug()
+    {
+        $this->assertEquals('limx-and-agnes', Str::slug('limx and Agnes'));
+    }
+
+    public function testSnake()
+    {
+        $this->assertEquals('limx_and_agnes', Str::snake('LimxAndAgnes'));
+        $this->assertEquals('limx_and_agnes', Str::snake('limxAndAgnes'));
+    }
+
+    public function testStartsWith()
+    {
+        $this->assertTrue(Str::startsWith('limx_and_agnes', 'lim'));
+    }
+
+    public function testStudly()
+    {
+        $this->assertEquals('LimxAndAgnes', Str::studly('limx_and_agnes'));
+    }
+
+    public function testSubstr()
+    {
+        $this->assertEquals('limx a', Str::substr('limx and Agnes', 0, 6));
+    }
+
+    public function testUcfirst()
+    {
+        $this->assertEquals('Limx and Agnes', Str::ucfirst('limx and Agnes'));
+
+    }
+
 
 }
