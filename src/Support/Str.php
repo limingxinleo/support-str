@@ -364,7 +364,10 @@ class Str
      */
     public static function singular($value)
     {
-        return Pluralizer::singular($value);
+        if (class_exists('limx\\Support\\Pluralizer')) {
+            return Pluralizer::singular($value);
+        }
+        return $value;
     }
 
     /**

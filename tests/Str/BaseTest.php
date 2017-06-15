@@ -101,4 +101,22 @@ class BaseTest extends TestCase
         $this->assertTrue(Str::length(Str::quickRandom(12)) === 12);
     }
 
+    public function testReplace()
+    {
+        $this->assertEquals('limxandAgnes', Str::replaceArray(' ', ['', 'A'], 'limx and gnes'));
+        $this->assertEquals('limx And agnes', Str::replaceFirst('a', 'A', 'limx and agnes'));
+        $this->assertEquals('limx and Agnes', Str::replaceLast('a', 'A', 'limx and agnes'));
+    }
+
+    public function testUpper()
+    {
+        $this->assertEquals('HELLO WORLD', Str::upper('Hello world'));
+    }
+
+    public function testTitle()
+    {
+        $this->assertEquals('Limx And Agnes', Str::title('limx and Agnes'));
+    }
+
+
 }
