@@ -24,6 +24,8 @@ class BaseTest extends TestCase
     public function testCamel()
     {
         $this->assertEquals('testCase', Str::camel('Test-Case'));
+        $this->assertEquals('testCase', Str::camel('test_case'));
+        $this->assertEquals('testCase', Str::camel('Test_case'));
     }
 
     public function testContains()
