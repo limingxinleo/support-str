@@ -46,17 +46,7 @@ class Str
      */
     public static function after($subject, $search)
     {
-        if ($search == '') {
-            return $subject;
-        }
-
-        $pos = strpos($subject, $search);
-
-        if ($pos === false) {
-            return $subject;
-        }
-
-        return substr($subject, $pos + strlen($search));
+        return $search === '' ? $subject : array_reverse(explode($search, $subject, 2))[0];
     }
 
     /**
@@ -72,6 +62,18 @@ class Str
         }
 
         return preg_replace('/[^\x20-\x7E]/u', '', $value);
+    }
+
+    /**
+     * Get the portion of a string before a given value.
+     *
+     * @param  string $subject
+     * @param  string $search
+     * @return string
+     */
+    public static function before($subject, $search)
+    {
+        return $search === '' ? $subject : explode($search, $subject)[0];
     }
 
     /**
@@ -177,10 +179,15 @@ class Str
      * Return the length of the given string.
      *
      * @param  string $value
+     * @param  string $encoding
      * @return int
      */
-    public static function length($value)
+    public static function length($value, $encoding = null)
     {
+        if ($encoding) {
+            return mb_strlen($value, $encoding);
+        }
+
         return mb_strlen($value);
     }
 

@@ -161,5 +161,14 @@ class BaseTest extends TestCase
         $this->assertEquals('hannah', Str::after('hannah', ''));
     }
 
+    public function testStrBefore()
+    {
+        $this->assertEquals('han', Str::before('hannah', 'nah'));
+        $this->assertEquals('ha', Str::before('hannah', 'n'));
+        $this->assertEquals('ééé han', Str::before('ééé hannah', 'nah'));
+        $this->assertEquals('hannah', Str::before('hannah', 'xxxx'));
+        $this->assertEquals('hannah', Str::before('hannah', ''));
+    }
+
 
 }
