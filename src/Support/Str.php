@@ -271,7 +271,7 @@ class Str
      * @param  int $length
      * @return string
      */
-    public static function random($length = 16)
+    private static function random7($length = 16)
     {
         $string = '';
 
@@ -291,21 +291,30 @@ class Str
      *
      * Should not be considered sufficient for cryptography, etc.
      *
-     * @deprecated since version 5.3. Use the "random" method directly.
-     *
      * @param  int $length
      * @return string
      */
-    public static function quickRandom($length = 16)
+    public static function random($length = 16)
     {
 
-        if (PHP_MAJOR_VERSION > 5) {
-            return static::random($length);
+        if (PHP_MAJOR_VERSION > 7) {
+            return static::random7($length);
         }
 
         $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
         return substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
+    }
+
+    /**
+     * @desc
+     * @author     limx
+     * @param int $length
+     * @deprecated since support-str > 1.1
+     */
+    public static function quickRandom($length = 16)
+    {
+        return static::random($length);
     }
 
     /**

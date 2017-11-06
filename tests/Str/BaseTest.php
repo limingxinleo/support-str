@@ -99,7 +99,7 @@ class BaseTest extends TestCase
 
     public function testRandom()
     {
-        // $this->assertTrue(Str::length(Str::random(12)) === 12);
+        $this->assertTrue(Str::length(Str::random(12)) === 12);
         $this->assertTrue(Str::length(Str::quickRandom(12)) === 12);
     }
 
